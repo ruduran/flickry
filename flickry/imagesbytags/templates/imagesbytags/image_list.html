@@ -1,0 +1,91 @@
+{% load staticfiles %}
+{% load macros %}
+{% load index %}
+{% load times %}
+
+{% macro pagination %}
+    {% if is_paginated %}
+    <div class="row">
+        <div class="col-md-12 centered">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+                {% endif %}
+                <span class="page-current">
+                    {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    {% endif %}
+{% endmacro %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Images: Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{% url 'tag_lists' %}"><i class="fas fa-arrow-left"></i> Go back</a>
+        </div>
+    </div>
+
+{% if object_list %}
+    {% use_macro pagination %}
+
+    {% for i in object_list.count|times %}
+    {% if not forloop.counter|divisibleby:2 %}
+    <div class="row">
+    {% endif %}
+    {% with image=object_list|index:i %}
+        <div class="col-md-3">
+            {% if image.image_url%}
+            <a href="{{image.image_url}}">
+            {% endif %}
+                <img src="{{image.image_url}}" />
+            {% if image.image_url%}
+            </a>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <i class="fas fa-image" title="Title"></i> <a href="{{image.image_page}}">{{ image.title }}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <i class="fas fa-user" title="User"></i> <a href="{{image.owner_page}}">{{ image.owner_name }}</a>
+                </div>
+            </div>
+            {% if image.description %}
+            <div class="row">
+                <div class="col-md-12">
+                    <i class="far fa-comment" title="Description"></i> {{ image.description | safe }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    {% endwith %}
+    {% if forloop.counter|divisibleby:2 or forloop.counter == object_list.count %}
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    {% use_macro pagination %}
+{% else %}
+    <div class="row">
+        <div class="col-md-12">No images found.</div>
+    </div>
+{% endif %}
+</body>
+</html>

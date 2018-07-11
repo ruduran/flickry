@@ -1,0 +1,39 @@
+body {
+    overflow-x: hidden;
+	background: rgba(235,235,235,1);
+	background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 47%, rgba(215,215,215,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(235,235,235,1)), color-stop(47%, rgba(235,235,235,1)), color-stop(100%, rgba(215,215,215,1)));
+	background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 47%, rgba(215,215,215,1) 100%);
+	background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 47%, rgba(215,215,215,1) 100%);
+	background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 47%, rgba(215,215,215,1) 100%);
+	background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 47%, rgba(215,215,215,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d7d7d7', GradientType=1 );
+}
+
+h1 {
+	font: bold italic 4em/1em "Times New Roman", "MS Serif", "New York", serif;
+	margin: 0;
+	padding: 0;
+	text-align:center;
+	margin-bottom: 5%;
+}
+
+img {
+    max-width: 100%;
+}
+
+i {
+    font-size: 1.2em;
+}
+
+.row {
+    padding: 10px;
+}
+
+.col-md-3 {
+    padding-right: 0;
+}
+
+.centered {
+    text-align: center;
+}
