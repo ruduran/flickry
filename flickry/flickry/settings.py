@@ -75,17 +75,27 @@ WSGI_APPLICATION = 'flickry.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'flickry',
-        'USER': 'flickryuser',
-        'PASSWORD': 'flickrypassword',
-        'HOST': 'localhost',
-        'PORT': '',
+if os.getenv('TRAVIS', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'travis_ci_db',
+            'USER': 'travis',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'flickry',
+            'USER': 'flickryuser',
+            'PASSWORD': 'flickrypassword',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 
 # Password validation

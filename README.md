@@ -1,5 +1,7 @@
 Service to download and browse Flickr images given some tag lists.
 
+[![Build Status](https://travis-ci.org/ruduran/flickry.svg?branch=master)](https://travis-ci.org/ruduran/flickry)
+
 ## Setup
 
 ### Database
